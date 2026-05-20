@@ -29,3 +29,38 @@ emit(eventName, data) {
     listener(data);
   }
 }
+const bus = new EventBus();
+
+function notificationListener(message) {
+  console.log(
+    "Notification system received:",
+    message
+  );
+}
+
+function analyticsListener(message) {
+  console.log(
+    "Analytics system processed:",
+    message
+  );
+}
+
+bus.subscribe("userLoggedIn", notificationListener);
+bus.subscribe("userLoggedIn", analyticsListener);
+
+bus.emit(
+  "userLoggedIn",
+  { username: "Yelyzaveta" }
+);
+
+bus.unsubscribe(
+  "userLoggedIn",
+  analyticsListener
+);
+
+console.log("After unsubscribe:");
+
+bus.emit(
+  "userLoggedIn",
+  { username: "Admin" }
+);
