@@ -10,3 +10,13 @@ subscribe(eventName, listener) {
 
   this.listeners[eventName].push(listener);
 }
+unsubscribe(eventName, listener) {
+  if (!this.listeners[eventName]) {
+    return;
+  }
+
+  this.listeners[eventName] =
+    this.listeners[eventName].filter(
+      currentListener => currentListener !== listener
+    );
+}
