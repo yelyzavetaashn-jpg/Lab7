@@ -20,3 +20,12 @@ unsubscribe(eventName, listener) {
       currentListener => currentListener !== listener
     );
 }
+emit(eventName, data) {
+  if (!this.listeners[eventName]) {
+    return;
+  }
+
+  for (const listener of this.listeners[eventName]) {
+    listener(data);
+  }
+}
